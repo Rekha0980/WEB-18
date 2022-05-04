@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       #navbar {
+       display: flex;
+        justify-content: space-between;
+        background-color:black;
+        padding: 20px;
+        color: white;
+        border-radius: 10px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+      #navbar a:hover {
+        color: white;
+        
+      }
+      #navbar>div{
+        cursor: pointer;
+        
+      }
+      #inn{
+        display: flex;
+        justify-content: space-around;
+      
+      }
+      #inn a{
+        color: white;
+      }
+      #inn>div{
+        margin-right: 20px;
+        
+      
+      }
+        
+        #container {
+          display: grid;
+          grid-template-columns: repeat(4,250px);
+          grid-template-rows: auto;
+          gap: 80px;
+          margin-top: 20px;
+          
+          
+        }
+       
+       .innerDiv {
+          display: flex;
+          justify-content:space-between;
+        }
+        .m{
+        margin-top: 10px;
+        margin-left:1200px;
+    
+        }
+       
+      </style>
+</head>
+<body>
+  <div id="navbar">
+    <div>Rebook</div>
+    <div id="inn">
+      <div><a href="men.html">Men</a></div>
+      <div><a href="women.html">Women</a></div>
+      <div><a href="signUp.html">Signup</a></div>
+      <div><a href="login.html">Login</a></div>
+      </div>
+    </div>
+ 
+  
+      <button class="m"><a href="cart.html">Go to cart</a></button>
+      <h1>Men's Page</h1>
+      <select id="sortNames" onchange="handleNameSort()">
+        <option value="">Sort By Names</option>
+        <option value="ascending">Ascending</option>
+        <option value="descending">Descending</option>
+      </select>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+     var data= [
+    {
+      imgUrl:
+        "https://m.media-amazon.com/images/I/61FctfgCKwL._AC_UL320_.jpg",
+      name: " MEN’S CASUAL",
+      price: "1399.00",
+
+    },
+    {
+      imgUrl:
+        "https://m.media-amazon.com/images/I/71BbsLyEsRL._AC_UL320_.jpg",
+      name: "STYLE MEN’S CASUAL",
+      price: "1299.00",
+    
+    },
+    {
+      imgUrl:
+        "https://m.media-amazon.com/images/I/A1wEjvjUA-L._AC_UL320_.jpg",
+      name: "NEW MEN’S CASUAL",
+      price: "1000.00",
+
+    },
+    {
+      imgUrl:
+        "https://m.media-amazon.com/images/I/71mHzvOfOpL._AC_UL320_.jpg",
+      name: "OLD MEN’S CASUAL",
+      price: "3129.00",
+    
+    },
+    {
+    imgUrl:
+        "https://m.media-amazon.com/images/I/71mHzvOfOpL._AC_UL320_.jpg",
+      name: "BRAND MEN’S CASUAL",
+      price: "3129.00",
+    
+     } ];
+     var cartItem = JSON.parse(localStorage.getItem("cart"))||[];
+
+     window.addEventListener("load", function () {
+      displayData(data);
+    });
+
+
+      function handleNameSort() {
+      var selected = document.querySelector("#sortNames").value;
+
+      if (selected == "ascending") {
+        data.sort(function (a, b) {
+          if (a.name > b.name) return 1;
+          if (a.name < b.name) return -1;
+          return 0;
+        });
+
+        displayData(data);
+
+      }
+
+      if (selected == "descending") {
+        data.sort(function (a, b) {
+          if (a.name > b.name) return -1;
+          if (a.name < b.name) return 1;
+          return 0;
+        });
+        
+        displayData(data);
+    }
+    }
+   function displayData(data){
+    document.querySelector("#container").innerHTML = "";
+    data.map(function (elem) {
+      
+      var div = document.createElement("div");
+
+      var img = document.createElement("img");
+      img.src = elem.imgUrl;
+
+      var name = document.createElement("p"); 
+      name.innerText = elem.name;
+
+      var priceDiv = document.createElement("div");
+      priceDiv.setAttribute("class", "innerDiv");
+
+      var price = document.createElement("p");
+      price.innerText = elem.price;
+      price.style.color="green"
+
+     
+      var button = document.createElement("button");
+      button.innerText = "Add to Cart";
+      button.addEventListener("click", function () {
+      addToCart(elem);
+    });
+     
+      priceDiv.append(price);
+
+      div.append(img, name, priceDiv,button);
+
+      document.querySelector("#container").append(div);
+    });
+    
+   }
+
+    function addToCart(elem) {
+        alert("item add to cart")
+    cartItem.push(elem);
+    localStorage.setItem("cart", JSON.stringify(cartItem));
+
+  }
+    
+</script>
