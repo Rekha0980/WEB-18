@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      #cont{
+        height: 200px;
+        width: 30%;
+        margin: auto;
+      }
+      input{
+        margin-bottom: 10px;
+      }
+      #navbar {
+       display: flex;
+        justify-content: space-around;
+        background-color:yellowgreen;
+        padding: 10px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+      #navbar a:hover {
+        color: white;
+      }
+      #navbar>div{
+        cursor: pointer;
+        
+      }
+       
+    </style>
+</head>
+<body>
+  <div id="navbar">
+    <div><a href="frontend.html">Fronted</a></div>
+    <div><a href="backend.html">Backend</a></div>
+   
+  </div>
+
+<div id="cont">
+  <h1>Enter Data</h1>
+        <form>
+            <input id="name" type="text" placeholder="Ente name" /><br />
+          <input id="image" type="text" placeholder="Enter Image URL" /><br />
+         <input id="logo" type="text" placeholder="Enter logo" /><br />
+          <input id="role" type="text" placeholder="Enter role" /><br />
+          <input type="submit" />
+        </form>
+        </div>
+</body>
+</html>
+
+<script>
+    document.querySelector("form").addEventListener("submit", myFunction);
+//refresh krne pe item chla ja rha
+
+var List = JSON.parse(localStorage.getItem("Data"))||[];
+function myFunction() {
+  event.preventDefault();
+  var name = document.querySelector("#name").value;
+  var imgURL = document.querySelector("#image").value;
+  var companyLogo = document.querySelector("#logo").value;
+  var role = document.querySelector("#role").value;
+
+
+  var Obj = {
+    Name: name,
+    image: imgURL,
+    Logo: companyLogo,
+    Role:role,
+  };
+  console.log(Obj);
+  List.push(Obj)
+
+  localStorage.setItem("Data", JSON.stringify(List));
+  window.location.href = "frontend.html";
+}
+
+</script>

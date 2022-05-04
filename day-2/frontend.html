@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: flex;
+        }
+        .photo{
+            width: 200px;
+            height: 200px;
+        }
+        .let{
+            width: 50px;
+        }
+        #container>div{
+            text-align: center;
+            margin-right: 20px;
+        }
+        #navbar {
+       display: flex;
+        justify-content: space-around;
+        background-color:yellowgreen;
+        padding: 10px;
+        margin-bottom: 20px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+      #navbar a:hover {
+        color: white;
+      }
+      #navbar>div{
+        cursor: pointer;
+        
+      }
+    </style>
+
+</head>
+<body>
+    <div id="navbar">
+        <div><a href="frontend.html">Fronted</a></div>
+        <div><a href="backend.html">Backend</a></div>
+       
+      </div>
+    <div id="container"></div>
+    
+</body>
+</html>
+<script>
+    var fav = JSON.parse(localStorage.getItem("Data"))
+
+        fav.map(function(ele){
+      var div=document.createElement("div")
+
+       var name=document.createElement("h2")
+        name.innerText=ele.Name
+
+       var img=document.createElement("img")
+       img.src=ele.image
+       img.setAttribute("class","photo")
+       
+     var role=document.createElement("p")
+     role.innerText=ele.Role
+
+
+    var logo=document.createElement("img")
+     logo.src=ele.Logo
+     logo.setAttribute("class","let")
+
+     
+
+
+     div.append(img,name,role,logo)
+    document.querySelector("#container").append(div)
+
+
+});
+
+
+  </script>
